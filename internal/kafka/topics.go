@@ -20,6 +20,9 @@ func GetAllTopics() []string {
 	topics := []string{}
 
 	for _, p := range partitions {
+		if p.Topic == "__consumer_offsets" {
+			continue
+		}
 		topics = append(topics, p.Topic)
 	}
 	return topics
