@@ -1,7 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"github.com/rashiraffi/streamease/internal/flow"
+	"github.com/rashiraffi/streamease/internal/kafka"
+)
 
 func main() {
-	fmt.Println("Hello, World!")
+
+	kafka.InitClient("")
+	kafka.Ping()
+
+	flow.InitialFlow()
+
 }
