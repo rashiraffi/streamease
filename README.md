@@ -5,8 +5,9 @@ StreamEase is a Go executable package that makes it easy to interact with Apache
 ## Features:
 
 - List all topics in your Kafka cluster
+- Create new topics in your Kafka cluster (in development)
 - Publish messages to specific topics
-- Consume messages from selected topics
+- Consume messages from selected topics (in development)
 
 ## Installation:
 
@@ -17,14 +18,13 @@ StreamEase is a Go executable package that makes it easy to interact with Apache
 
 - To start the program, run `streamease`
 - Additional tags that can be used:
+
   - `-host` to specify the hostname/IP address of your Kafka cluster
   - `-mode` to specify the program mode. It can be:
-    - `interactive` to start with interactive mode
-    - `consumer` to start with consumer mode
-    - `producer` to start with producer mode
+    - `interactive` to start with interactive mode. In interactive mode, you will be prompted to select the actions you want to perform.
+    - `consumer` to start with consumer mode. In consumer mode, you will be prompted to select the topic from which you want to consume messages.
+    - `producer` to start with producer mode. In producer mode, you will be prompted to select the topic to which you want to publish messages.
 
-In interactive mode, you will be prompted to select the actions you want to perform.
-In consumer mode, you will be prompted to select the topic from which you want to consume messages.
-In producer mode, you will be prompted to select the topic to which you want to publish messages.
+- `streamease -host localhost:9092 -mode interactive` will start the program in interactive mode with the host set to localhost:9092.
 
 We hope you find StreamEase useful and enjoy using it!
