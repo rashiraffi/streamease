@@ -17,23 +17,22 @@ func InteractiveFlow() {
 
 		switch selectedOption {
 		case "1":
-			fmt.Println("\033[2J")
+			clear()
 			listAllTopics()
 		case "2":
+			clear()
 			fmt.Println("Create a Topic")
-			fmt.Println("\033[2J")
 		case "3":
-			fmt.Println("\033[2J")
+			clear()
 			PublishFlow()
-			fmt.Println("\033[2J")
 		case "4":
+			clear()
 			fmt.Println("Consume from a Topic")
-			fmt.Println("\033[2J")
 		case "5":
-			fmt.Println("\033[2J")
-			os.Exit(1)
+			clear()
+			os.Exit(0)
 		default:
-			fmt.Println("\033[2J")
+			clear()
 			fmt.Println("Invalid Option, please try again.")
 		}
 	}

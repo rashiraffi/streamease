@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os"
+	"os/exec"
 	"strings"
 
 	"github.com/rashiraffi/streamease/internal/flow"
@@ -30,6 +31,10 @@ func main() {
 
 	kafka.InitClient(host)
 	kafka.Ping()
+
+	c := exec.Command("clear")
+	c.Stdout = os.Stdout
+	c.Run()
 
 	switch strings.ToLower(mode) {
 	case "interactive":

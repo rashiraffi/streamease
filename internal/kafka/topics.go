@@ -1,6 +1,8 @@
 package kafka
 
 import (
+	"sort"
+
 	"github.com/rashiraffi/streamease/internal/config"
 	"github.com/segmentio/kafka-go"
 )
@@ -25,5 +27,6 @@ func GetAllTopics() []string {
 		}
 		topics = append(topics, p.Topic)
 	}
+	sort.Strings(topics)
 	return topics
 }

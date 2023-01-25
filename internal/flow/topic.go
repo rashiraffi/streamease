@@ -8,11 +8,7 @@ import (
 
 func listAllTopics() {
 	topics := kafka.GetAllTopics()
-	fmt.Println()
 	for _, topic := range topics {
-		if topic == "__consumer_offsets" {
-			continue
-		}
 		fmt.Println(topic)
 	}
 	fmt.Println()

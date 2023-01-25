@@ -1,8 +1,10 @@
 package kafka
 
 import (
+	"bufio"
 	"context"
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/rashiraffi/streamease/internal/config"
@@ -26,12 +28,16 @@ func Publish(topic string, header map[string]string) {
 			Value: []byte(v),
 		})
 	}
-	fmt.Println("\033[2J")
 	fmt.Printf("Publishing to topic: %s, Input 'Exit' to exit\n", topic)
 	for {
 		var input string
-		fmt.Scanln(&input)
+		scanner := bufio.NewScanner(os.Stdin)
+
+		scanner.Scan()
+		input = scanner.Text()
+
 		if strings.ToLower(input) == "exit" {
+			clear()
 			break
 		}
 
@@ -51,7 +57,7 @@ func Publish(topic string, header map[string]string) {
 		)
 
 		if err != nil {
-			fmt.Println("\033[2J")
+			clear()
 			log.Error().Err(err).Msg("Error publishing message")
 			return
 		}
