@@ -1,5 +1,5 @@
 /*
-Copyright © 2023 Rashi Raffi
+Copyright © 2023 Rashi Raffi <rashi1281@gmail.com>
 */
 package main
 
