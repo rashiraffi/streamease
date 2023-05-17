@@ -47,7 +47,7 @@ func init() {
 
 	rootCmd.AddCommand(kafka.KafkaCmd)
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.streamease.yaml)")
+	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.streamease.yaml)")
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -75,7 +75,8 @@ func initConfig() {
 	// If a config file is found, read it in.
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			viper.SetDefault("kafka.brokers", []string{"localhost:9092"})
+			viper.SetDefault("kafka.default_profile", "default")
+			viper.SetDefault("kafka.profile.default.host", "localhost:9092")
 			viper.SafeWriteConfig()
 		} else {
 			fmt.Println("Error reading config file:", err)

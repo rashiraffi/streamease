@@ -3,12 +3,12 @@ package kafka
 import (
 	"sort"
 
-	"github.com/rashiraffi/streamease/internal/config"
 	"github.com/segmentio/kafka-go"
 )
 
-func GetAllTopics() []string {
-	conn, err := kafka.Dial("tcp", config.KafkaHost)
+// GetAllTopics returns a slice of strings containing all the topics in the Kafka cluster.
+func (k *kafkaClient) GetAllTopics() []string {
+	conn, err := kafka.Dial("tcp", k.HostAddr)
 	if err != nil {
 		panic(err.Error())
 	}

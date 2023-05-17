@@ -6,6 +6,7 @@ package kafka
 import (
 	"fmt"
 
+	"github.com/rashiraffi/streamease/internal/kafka"
 	"github.com/spf13/cobra"
 )
 
@@ -16,36 +17,31 @@ var (
 // pingCmd represents the ping command
 var pingCmd = &cobra.Command{
 	Use:   "ping",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Check if the Kafka broker is up and running",
+	Long:  `The ping command checks if the Kafka broker is up and running by sending a ping request to the broker. If the broker is up and running, the command returns a success message. Otherwise, it returns an error message.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("ping called", args)
+		hostAddr, err := getBrokerAddr(broker, profile)
+		if err != nil {
+			fmt.Println("Error: ", err)
+			return
+		}
 
-		// cmd.Help()
+		client := kafka.New(hostAddr)
+		err = client.Ping()
+		if err != nil {
+			fmt.Println("Error: ", err)
+		} else {
+			fmt.Println("Kafka broker is up and running")
+		}
+
 	},
 }
 
 func init() {
 
-	pingCmd.Flags().StringVarP(&urlPath, "url", "u", "", "url path")
-	if err := pingCmd.MarkFlagRequired("url"); err != nil {
-		fmt.Println("Error:", err)
-	}
+	pingCmd.Flags().StringVarP(&profile, "profile", "p", "", "profile name")
+	pingCmd.Flags().StringVarP(&broker, "broker", "b", "", "kafka broker address")
 
 	KafkaCmd.AddCommand(pingCmd)
 
-	// Here you will define your flags and configuration settings.
-
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// pingCmd.PersistentFlags().String("foo", "", "A help for foo")
-
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// pingCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
 }
